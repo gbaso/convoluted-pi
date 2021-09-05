@@ -1,6 +1,5 @@
 package com.example.pi;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -55,15 +54,19 @@ public class ConvolutedPiApplication {
         return counter;
     }
 
-    private int coprime(BigInteger a, BigInteger b) {
-        return a.gcd(b).intValueExact() == 1 ? 1 : 0;
+    private int random(Random generator) {
+        return generator.nextInt(MAX) + 1;
     }
 
-    BigInteger random(Random generator) {
-        return BigInteger.valueOf(generator.nextInt(MAX) + 1);
+    private int coprime(int a, int b) {
+        return gcd(a, b) == 1 ? 1 : 0;
     }
 
-    double pi(long counter) {
+    private int gcd(int a, int b) {
+        return a == 0 ? b : gcd(b % a, a);
+    }
+
+    private double pi(long counter) {
         return Math.sqrt(6d * ITER * PARALL / counter);
     }
 
